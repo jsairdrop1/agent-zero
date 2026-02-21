@@ -1945,7 +1945,7 @@ export function convertIcons(html, classes = "") {
   if (html == null) return "";
 
   return String(html).replace(
-    /icon:\/\/([a-zA-Z0-9_]+)(\[(?:\\.|[^\]])*\])?/g,
+    /icon:\/\/([a-zA-Z0-9_]+)(\[(?:\\.|[^\\\]])*\])?/g,
     (match, iconName, tooltipBlock) => {
       if (!tooltipBlock) {
         return `<span class="icon material-symbols-outlined ${classes}">${iconName}</span>`;
@@ -1971,7 +1971,7 @@ export function convertIcons(html, classes = "") {
 function cleanStepTitle(text, maxLength = 100) {
   if (!text) return "";
   let cleaned = String(text)
-    .replace(/icon:\/\/[a-zA-Z0-9_]+(\[(?:\\.|[^\]])*\])?\s*/g, "")
+    .replace(/icon:\/\/[a-zA-Z0-9_]+(\[(?:\\.|[^\\\]])*\])?\s*/g, "")
     .replace(/\s+/g, " ")
     .trim();
   return truncateText(cleaned, maxLength);
