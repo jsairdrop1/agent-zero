@@ -541,11 +541,14 @@ const model = {
       // Extract text content (this strips all HTML tags properly)
       text = doc.body.textContent || "";
     } catch (e) {
-      // Fallback: simple tag stripping if DOMParser fails
+      // Fallback: DOM-based stripping if DOMParser fails
       console.warn("[Speech Store] DOMParser failed, using fallback:", e);
-      text = text.replace(/<pre[^>]*>[\s\S]*?<\/pre>/gi, codePlaceholder);
-      text = text.replace(/<code[^>]*>[\s\S]*?<\/code>/gi, codePlaceholder);
-      text = text.replace(/<[^>]+>/g, ''); // strip remaining tags
+      const container = document.createElement('div');
+      container.innerHTML = text;
+      container.querySelectorAll('pre, code').forEach(el => {
+        el.textContent = codePlaceholder;
+      });
+      text = container.textContent || "";
     }
 
     // Remove markdown links: [label](url) → label
