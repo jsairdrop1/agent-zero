@@ -1945,7 +1945,7 @@ export function convertIcons(html, classes = "") {
   if (html == null) return "";
 
   return String(html).replace(
-    /icon:\/\/([a-zA-Z0-9_]+)(\[(?:\\.|[^\]])*\])?/g,
+    /icon:\/\/([a-zA-Z0-9_]+)(\[(?:\\.|[^\]\\])*\])?/g,
     (match, iconName, tooltipBlock) => {
       if (!tooltipBlock) {
         return `<span class="icon material-symbols-outlined ${classes}">${iconName}</span>`;
