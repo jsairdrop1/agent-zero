@@ -1665,7 +1665,7 @@ function convertPathsToLinks(str) {
   );
 
   // skip paths inside html tags, like <img src="/path/to/image">
-  const tagRegex = /(<(?:[^<>"']+|"[^"]*"|'[^']*')*>)/g;
+  const tagRegex = /<[^>]*>/g;
 
   return str
     .split(tagRegex) // keep tags & text separate
